@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../auth/[...nextauth]/route';
 import prisma from '../../../lib/db';
 
 export async function GET() {
   try {
-    // For now, skip authentication to get the deployment working
+    // Temporarily remove auth check for deployment
     const jobs = await prisma.bookings.findMany({
       where: {
         option_booking_status: 'confirmed'

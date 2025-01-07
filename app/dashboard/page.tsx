@@ -7,19 +7,8 @@ export default function DashboardRedirect() {
   const router = useRouter();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('impersonatedUser');
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      if (user.role === 'Client') {
-        router.push('/dashboard/client');
-      } else if (user.role === 'Artist') {
-        router.push('/dashboard/artist');
-      } else {
-        router.push('/data/users');
-      }
-    } else {
-      router.push('/data/users');
-    }
+    // For now, always redirect to client dashboard
+    router.push('/dashboard/client');
   }, [router]);
 
   return (

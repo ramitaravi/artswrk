@@ -52,16 +52,17 @@ export default function ClientDashboard() {
   const [artistFilter, setArtistFilter] = useState<'all' | 'hired' | 'interested'>('all');
 
   useEffect(() => {
-    // Check for impersonated user
-    const storedUser = localStorage.getItem('impersonatedUser');
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      setImpersonatedUser(user);
-      if (user.role !== 'Client') {
-        router.push('/dashboard/artist');
-      }
-    }
-  }, [router]);
+    // Temporary: Set a mock user for initial deployment
+    const mockUser = {
+      id: "1",
+      name: "Demo User",
+      email: "demo@example.com",
+      role: "Client",
+      companyName: "Demo Company",
+      plan: "pro" as const
+    };
+    setImpersonatedUser(mockUser);
+  }, []);
 
   // Placeholder data - would come from your API
   const stats = {
