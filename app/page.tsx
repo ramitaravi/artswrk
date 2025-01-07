@@ -1,19 +1,18 @@
-export default function Home() {
-  return (
-    <div className="space-y-12">
-      <section className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Welcome to Our Site</h1>
-        <p className="text-xl text-gray-600">
-          Add your compelling introduction or call to action here.
-        </p>
-      </section>
+'use client';
 
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold">Our Features</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {/* Add feature cards here */}
-        </div>
-      </section>
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/dashboard/client');
+  }, [router]);
+
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
     </div>
   );
 } 
