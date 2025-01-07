@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(
+    -45deg,
+    #FFBC5D,
+    #F25722,
+    #ec008c,
+    #6C63FF
+  );
+  background-size: 400% 400%;
+  animation: gradient-animation 15s ease infinite;
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.artist-gradient {
+  background: linear-gradient(to right, #ec008c, #ff7171);
+}
+
+.client-gradient {
+  background: linear-gradient(to right, #FFBC5D, #F25722);
+}
+
+@layer base {
+  /* Base text styles */
+  body {
+    @apply font-sans text-gray-900 bg-white antialiased;
+  }
+
+  /* Display/Heading Text */
+  h1 {
+    @apply font-display text-[32px] leading-[1.2] font-semibold;
+    /* Main page titles */
+  }
+
+  h2 {
+    @apply font-display text-[24px] leading-[1.2] font-semibold;
+    /* Section headers */
+  }
+
+  h3 {
+    @apply font-sans text-[18px] leading-[1.3] font-semibold;
+    /* Card titles, subsections */
+  }
+
+  h4 {
+    @apply font-sans text-[16px] leading-[1.3] font-semibold;
+    /* Smaller subsections */
+  }
+}
+
+@layer components {
+  /* Tab Navigation */
+  .tab-group {
+    @apply flex space-x-4 border-b border-gray-200;
+  }
+
+  .tab {
+    @apply text-sm font-medium pb-2 -mb-px;
+    @apply transition-colors duration-150;
+  }
+
+  .tab-active {
+    @apply text-black border-b-2 border-black;
+  }
+
+  .tab-inactive {
+    @apply text-gray-500 hover:text-gray-900;
+  }
+
+  /* Tab Container Variants */
+  .tab-container {
+    @apply border-b border-gray-200;
+  }
+
+  .tab-container-light {
+    @apply bg-gray-50 border-b border-gray-200;
+  }
+
+  /* Tab Content */
+  .tab-content {
+    @apply pt-4;
+  }
+
+  /* Text Styles */
+  .text-title {
+    @apply font-sans text-2xl font-semibold text-gray-900;
+  }
+
+  .text-subtitle {
+    @apply font-sans text-lg font-semibold text-gray-900;
+  }
+
+  /* Body Text */
+  .text-body {
+    @apply font-sans text-sm font-normal text-gray-600;
+  }
+
+  .text-body-medium {
+    @apply font-sans text-sm font-medium text-gray-900;
+  }
+
+  .text-body-semibold {
+    @apply font-sans text-sm font-semibold text-gray-900;
+  }
+
+  /* Small Text */
+  .text-small {
+    @apply font-sans text-xs font-normal text-gray-500;
+  }
+
+  .text-small-medium {
+    @apply font-sans text-xs font-medium text-gray-500;
+  }
+
+  /* Input Text */
+  .input-text {
+    @apply font-sans text-sm text-gray-900 placeholder:text-gray-400;
+  }
+
+  /* Message Styles */
+  .message-sender {
+    @apply font-sans text-sm text-gray-500;
+  }
+
+  .message-content {
+    @apply font-sans text-sm;
+  }
+
+  .message-timestamp {
+    @apply font-sans text-xs text-gray-500;
+  }
+
+  /* Special Cases */
+  .badge-text {
+    @apply font-sans text-xs font-medium;
+  }
+
+  .stat-number {
+    @apply font-sans text-2xl font-semibold text-gray-900;
+  }
+
+  .stat-label {
+    @apply font-sans text-sm text-gray-500;
+  }
+} 
