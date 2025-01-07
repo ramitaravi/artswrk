@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,42 +7,127 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Define your models here
+model bookings {
+  id                                               Int     @id @default(autoincrement())
+  option_booking_status                            String? @map("_option_booking_status") @db.VarChar(50)
+  option_payment_status                            String? @map("_option_payment_status") @db.VarChar(50)
+  Added_to_Spreadsheet_                            String? @map("Added to Spreadsheet?") @db.VarChar(5)
+  Artist                                           String? @db.VarChar(255)
+  Artist_Rate                                      String? @map("Artist Rate") @db.VarChar(50)
+  Client                                           String? @db.VarChar(255)
+  Client_Rate                                      String? @map("Client Rate") @db.VarChar(50)
+  deleted_                                         String? @map("deleted?") @db.VarChar(5)
+  Description                                      String?
+  End_date                                         String? @map("End date") @db.VarChar(255)
+  external_payment_                                String? @map("external payment?") @db.VarChar(5)
+  Gross_Profit                                     String? @map("Gross Profit") @db.VarChar(50)
+  hours                                            String? @db.VarChar(50)
+  Interested_Artist                                String? @map("Interested Artist") @db.VarChar(255)
+  invoice                                          String? @db.VarChar(5)
+  Job                                              String? @db.VarChar(255)
+  List_of_Payments                                 String? @map("List of Payments")
+  List_of_Reimbursement                            String? @map("List of Reimbursement")
+  Location                                         String?
+  new_rate_proposal                                String? @db.VarChar(50)
+  new_rate_proposal_message                        String?
+  Notification_Artist_Scheduled_Reminder           String? @db.VarChar(5)
+  On_Demand_Service                                String? @map("On-Demand Service") @db.VarChar(5)
+  Post_Fee_Revenue                                 String? @map("Post Fee Revenue") @db.VarChar(50)
+  Request                                          String? @db.VarChar(255)
+  Session_Number                                   String? @map("Session Number") @db.VarChar(50)
+  show_alert_                                      String? @map("show_alert?") @db.VarChar(5)
+  Start_date                                       String? @map("Start date") @db.VarChar(255)
+  Stripe_checkout_url                              String? @map("Stripe checkout url")
+  stripe_fee                                       String? @map("stripe fee") @db.VarChar(50)
+  time                                             String?
+  Time_Slot                                        String? @map("Time Slot") @db.VarChar(255)
+  Total_Artist_Rate__Artist_Rate___Reimbursements_ String? @map("Total Artist Rate (Artist Rate + Reimbursements)") @db.VarChar(50)
+  Total_Client_Rate__Client_Rate___Reimbursements_ String? @map("Total Client Rate (Client Rate + Reimbursements)") @db.VarChar(50)
+  Wf_ID_1                                          String? @map("Wf_ID 1") @db.VarChar(255)
+  Wf_ID_2                                          String? @map("Wf_ID 2") @db.VarChar(255)
+  Creation_Date                                    String? @map("Creation Date") @db.VarChar(255)
+  Modified_Date                                    String? @map("Modified Date") @db.VarChar(255)
+  Slug                                             String? @db.VarChar(255)
+  Creator                                          String? @db.VarChar(255)
+  unique_id                                        String? @unique @map("unique id") @db.VarChar(255)
 
-model User {
-  id                String    @id @default(cuid())
-  uniqueid          String    @unique @default(cuid())
-  email             String    @unique
-  name              String?
-  fullname          String?
-  profilepicture    String?
-  location          String?
-  role              String    @default("user")
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  bookings          Booking[]
-  postedJobs        Job[]     @relation("JobPoster")
-  interestedInJobs  Job[]     @relation("InterestedArtists")
+  @@index([Artist], map: "idx_bookings_artist")
+  @@index([option_booking_status], map: "idx_bookings_booking_status")
+  @@index([Client], map: "idx_bookings_client")
+  @@index([option_payment_status], map: "idx_bookings_payment_status")
+  @@index([Start_date], map: "idx_bookings_start_date")
 }
 
-model Booking {
-  id        String   @id @default(cuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  status    String   @default("pending")
-  date      DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Job {
-  id                String   @id @default(cuid())
-  title            String
-  description      String
-  status          String   @default("open")
-  userId          String
-  user            User     @relation("JobPoster", fields: [userId], references: [id])
-  interestedArtists User[]  @relation("InterestedArtists")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+model users {
+  addedbyadmin                 String?
+  affiliations                 String?
+  artistexperiences            String?
+  artistonboardingcomplete     String?
+  artistservices               String?
+  artiststripeaccountid        String?
+  artiststripeaccounttype      String?
+  artiststripebusinessname     String?
+  artiststripedatecreated      String?
+  artiststripereturncode       String?
+  artisttransportationaccesses String?
+  artswrkbasic                 String?
+  artswrkproartists            String?
+  availabilitydetails          String?
+  beta                         String?
+  bio                          String?
+  bookings                     String?
+  businessorindividual         String?
+  clientcompanies              String?
+  clientcompanyname            String?
+  clientpaymentmethod          String?
+  clientpremium                String?
+  clientsessionid              String?
+  clientsetupintentid          String?
+  clientstripecardid           String?
+  clientstripecustomerid       String?
+  clientsubscriptionid         String?
+  clienttransportdetails       String?
+  credits                      String?
+  emailaddress                 String?
+  eoyemail                     String?
+  favoritesartists             String?
+  firstname                    String?
+  fullname                     String?
+  fuzzysearch                  String?
+  hiringcategory               String?
+  instagram                    String?
+  invitedusers                 String?
+  lastlogin                    String?
+  lastname                     String?
+  latecancel                   String?
+  listofavailability           String?
+  listofmasterservices         String?
+  listofmasterstyles           String?
+  location                     String?
+  masterartisttypes            String?
+  masterclasslandingpage       String?
+  nopw                         String?
+  notifications                String?
+  onbehalfof                   String?
+  onboardingstep               String?
+  optionavailability           String?
+  phonenumber                  String?
+  popupseen                    String?
+  prioritylist                 String?
+  profilepicture               String?
+  pronouns                     String?
+  refresh                      String?
+  stripeemailsentonce          String?
+  stripeproductid              String?
+  tiktok                       String?
+  userrole                     String?
+  viewadmindashboard           String?
+  website                      String?
+  youtube                      String?
+  creationdate                 String?
+  modifieddate                 String?
+  slug                         String?
+  email                        String? @unique
+  nullfield                    String?
+  uniqueid                     String  @id
 }
